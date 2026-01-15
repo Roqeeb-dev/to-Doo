@@ -41,75 +41,106 @@ export default function Landing() {
   }
 
   return (
-    <main className="w-[500px] mx-auto h-[70vh] bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl border border-slate-700 p-6 text-white shadow-xl">
-      <h1 className="text-2xl font-bold text-center mb-6">
-        Todo: Do Everything
+    <main
+      className="w-[520px] mx-auto h-[72vh] 
+  bg-gradient-to-br from-[#0f172a]/90 via-[#020617]/90 to-[#020617]
+  backdrop-blur-xl rounded-[2.2rem]
+  border border-white/10
+  p-7 text-slate-100
+  shadow-[0_20px_60px_-15px_rgba(56,189,248,0.25)]"
+    >
+      {/* Header */}
+      <h1
+        className="text-3xl font-semibold tracking-wide text-center mb-7
+    bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400
+    bg-clip-text text-transparent"
+      >
+        Todo · Do Everything
       </h1>
 
       {/* Todo input box */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex gap-3 mb-7">
         <input
           type="text"
           name="todo"
           id="todo"
-          placeholder="Enter your new todo here"
-          className="flex-1 rounded-xl bg-slate-800 border border-slate-600 px-4 py-2 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="What are we building today?"
+          className="flex-1 rounded-2xl
+        bg-white/5 backdrop-blur
+        border border-white/10
+        px-5 py-3 text-sm
+        placeholder-slate-400
+        focus:outline-none focus:ring-2 focus:ring-cyan-400/50
+        transition"
           value={todo}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setTodo(e.target.value);
           }}
         />
+
         <button
           onClick={() => {
             addTodo(todo);
           }}
-          className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition text-sm font-medium"
+          className="px-6 py-3 rounded-2xl text-sm font-medium
+        bg-gradient-to-r from-cyan-500 to-blue-500
+        hover:from-cyan-400 hover:to-blue-400
+        active:scale-[0.97]
+        transition shadow-lg shadow-cyan-500/30"
         >
           Add
         </button>
       </div>
 
       {/* Todos */}
-      <div className="space-y-3 overflow-y-auto max-h-[45vh] pr-1">
+      <div
+        className="space-y-4 overflow-y-auto max-h-[46vh] pr-1
+    scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+      >
         {todos.map((todo, index) => (
           <div
             key={index}
-            className={`flex items-center justify-between rounded-2xl px-4 py-3 border transition
-              ${
-                todo.isCompleted
-                  ? "bg-green-900/40 border-green-700"
-                  : "bg-slate-800 border-slate-700"
-              }
-            `}
+            className={`flex items-center justify-between
+          rounded-2xl px-5 py-4
+          border backdrop-blur
+          transition-all duration-300
+          ${
+            todo.isCompleted
+              ? "bg-emerald-500/10 border-emerald-400/30"
+              : "bg-white/5 border-white/10 hover:border-cyan-400/30"
+          }`}
           >
             <div>
               <p
-                className={`text-sm font-medium ${
-                  todo.isCompleted
-                    ? "line-through text-green-300"
-                    : "text-slate-200"
-                }`}
+                className={`text-sm font-medium tracking-wide
+              ${
+                todo.isCompleted
+                  ? "line-through text-emerald-300"
+                  : "text-slate-200"
+              }`}
               >
                 {todo.text}
               </p>
-              <p className="text-xs text-slate-400">
+
+              <p
+                className="text-xs mt-1 uppercase tracking-widest
+            text-slate-400"
+              >
                 {todo.isCompleted ? "Completed" : "Pending"}
               </p>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               {!todo.isCompleted && (
                 <button
                   onClick={() => {
                     markAsDone(todo.id);
                   }}
-                  className={`text-xs px-3 py-1 rounded-full border transition
-                ${
-                  todo.isCompleted
-                    ? "border-green-600 text-green-400"
-                    : "border-slate-600 text-slate-300 hover:bg-slate-700"
-                }
-              `}
+                  className="text-xs px-4 py-1.5 rounded-full
+                border border-white/20
+                text-slate-300
+                hover:bg-cyan-400/10 hover:border-cyan-400/40
+                transition"
                 >
                   Mark Done
                 </button>
@@ -119,7 +150,9 @@ export default function Landing() {
                 onClick={() => {
                   deleteTodo(todo.id);
                 }}
-                className="w-7 h-7 text-red-500"
+                className="w-7 h-7 text-red-400
+              hover:text-red-300 hover:rotate-90
+              transition duration-300"
               />
             </div>
           </div>
